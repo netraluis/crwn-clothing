@@ -4,6 +4,8 @@ import {auth} from './../../firebase/firebase.utils';
 import {ReactComponent as Logo} from './../../assets/crown.svg';
 import './header.styles.scss';
 
+import {connect} from 'react-redux';
+
 const Header =({currentUser})=>(
     <div className='header'>
         <Link className='logo-container' to='/'>
@@ -23,8 +25,14 @@ const Header =({currentUser})=>(
                 <Link className='option' to ='/signin'>SIGN IN</Link>
             }
         </div>
-    
     </div>
-)
+);
 
-export default Header;
+//Redux
+
+const mapStateToProps = (state)=>({
+    //currentUserVariable que usamos en el componente el primero sería el caso de que cojamos una variable del state
+    currentUser: state.user.currentUser
+})
+
+export default connect(mapStateToProps)(Header);
