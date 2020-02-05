@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import ShopPage from './pages/shop/shop.component';
 
 import HomePage from './pages/homepages/homepage.component';
 import Header from './components/header/header.component';
-import signInsignUp from './pages/sign-in-sign-up/sign-in-sign-up.component';
+import SignInsignUp from './pages/sign-in-sign-up/sign-in-sign-up.component';
 import {auth,createUserProfileDocument} from './firebase/firebase.utils';
 
 import {connect} from 'react-redux';
@@ -14,12 +14,6 @@ import {setCurrentUser} from './redux/user/user.action';
 
 
 class App extends React.Component {
-// constructor(){
-//   super();
-//   this.state = {
-//     currentUser: null
-//   }
-// }
 
 unsubsribeFromAuth = null
 
@@ -58,12 +52,18 @@ componentWillUnmount(){
         <Switch>
           <Route exact path='/' component = {HomePage} />
           <Route path='/shop' component = {ShopPage}/>
-          <Route path='/signin' component = {signInsignUp} />
+          <Route exact path='/signin' render = {
+            ()=>(this.props.currentUser ? (<Redirect to = '/'/>):(<SignInsignUp/>))
+ }/>
         </Switch>
       </div>
     );
   }
 }
+
+const mapStateToProps = ({user}) =>({
+  currentUser: user.currentUser
+})
 
 //cambiamos una variable global signIN signOUT
 const mapDispatchToProps = dispatch =>({
@@ -72,4 +72,4 @@ const mapDispatchToProps = dispatch =>({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 //usamos segundo argumento el primero sirve para coger una variable este para cambiarla
-export default connect(null,mapDispatchToProps)(App);
+export default connect(mapStateToProps,mapDispatchToProps)(App);
