@@ -17,14 +17,10 @@ const cartReducer = (state = INITIAL_STATE, action) => {
             };
 
         case CartActionTypes.ADD_ITEM:
-            // state.carItems = []
-            // let array = []
-            // array =  addItemToCart(state.carItems, action.payload)
-            // console.log('reducer',array,action.payload,state.carItems)
-            // state.carItems 
             return {
-                cartItems: addItemToCart(state.carItems, action.payload),
                 ...state,
+                // cartItems: state.carItems.push(...(addItemToCart(state.carItems, action.payload))),
+                carItems:addItemToCart(state.carItems, action.payload),
             };
 
         default:

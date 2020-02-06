@@ -12,7 +12,19 @@ if (existingCartItem){
         : cartItem
         )
 }
-console.log('cartutils',[...cartItems, {...cartItemToAdd, quantity:1}])
+// console.log('cartutils sssssss',[...cartItems, {...cartItemToAdd, quantity:1}]);
+// let arrayResultado = [...cartItems, {...cartItemToAdd, quantity:1}].sort((a,b)=>{
+//     if(a.quantity > b.quantity){
+//         return -1;
+//     }
+//     if(a.quantity<b.quantity){
+//         return 1
+//     }
+//     return 0;
+// // })
+
+// console.log('arrayResultado', arrayResultado)
+
 return [...cartItems, {...cartItemToAdd, quantity:1}];
 // return cartItems.push({...cartItemToAdd, quantity:1})
 }
