@@ -8,7 +8,7 @@ import CartDropdown from './../cart-dropdown/cart-dropdown.component'
 
 import {connect} from 'react-redux';
 
-const Header =({currentUser})=>(
+const Header =({currentUser,hidden})=>(
     <div className='header'>
         <Link className='logo-container' to='/'>
             <Logo className = 'logo'/>
@@ -29,16 +29,20 @@ const Header =({currentUser})=>(
 
             <CartIcon/>
         </div>
-        <CartDropdown/>
+        {
+            (hidden) ? null : <CartDropdown/>
+        }
+        
     </div>
 
 );
 
 //Redux
 
-const mapStateToProps = (state)=>({
+const mapStateToProps = ({user:{currentUser},cart:{hidden}})=>({
     //currentUserVariable que usamos en el componente el primero sería el caso de que cojamos una variable del state
-    currentUser: state.user.currentUser
+    currentUser,
+    hidden
 })
 
 export default connect(mapStateToProps)(Header);
