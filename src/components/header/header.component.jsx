@@ -8,6 +8,10 @@ import CartDropdown from './../cart-dropdown/cart-dropdown.component'
 
 import {connect} from 'react-redux';
 
+import {createStructuredSelector} from 'reselect';
+import {selectCurrentUser} from './../../redux/user/user.selector';
+import {selectCarHidden} from './../../redux/cart/cart.selector';
+
 const Header =({currentUser,hidden})=>(
     <div className='header'>
         <Link className='logo-container' to='/'>
@@ -39,10 +43,10 @@ const Header =({currentUser,hidden})=>(
 
 //Redux
 
-const mapStateToProps = ({user:{currentUser},cart:{hidden}})=>({
+const mapStateToProps = createStructuredSelector({
     //currentUserVariable que usamos en el componente el primero sería el caso de que cojamos una variable del state
-    currentUser,
-    hidden
+    currentUser: selectCurrentUser,
+    hidden: selectCarHidden
 })
 
 export default connect(mapStateToProps)(Header);

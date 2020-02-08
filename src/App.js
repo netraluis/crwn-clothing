@@ -1,15 +1,20 @@
 import React from 'react';
 import './App.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import ShopPage from './pages/shop/shop.component';
 
+import ShopPage from './pages/shop/shop.component';
 import HomePage from './pages/homepages/homepage.component';
+import CheckoutPage from './pages/checkout/checkout.component'
+
 import Header from './components/header/header.component';
 import SignInsignUp from './pages/sign-in-sign-up/sign-in-sign-up.component';
 import {auth,createUserProfileDocument} from './firebase/firebase.utils';
 
 import {connect} from 'react-redux';
 import {setCurrentUser} from './redux/user/user.action';
+
+import {selectCurrentUser} from './redux/user/user.selector';
+import {createStructuredSelector} from 'reselect'
 
 
 
@@ -52,6 +57,7 @@ componentWillUnmount(){
         <Switch>
           <Route exact path='/' component = {HomePage} />
           <Route path='/shop' component = {ShopPage}/>
+          <Route exact path='/checkout' component = {CheckoutPage}/>
           <Route exact path='/signin' render = {
             ()=>(this.props.currentUser ? (<Redirect to = '/'/>):(<SignInsignUp/>))
  }/>
@@ -61,8 +67,8 @@ componentWillUnmount(){
   }
 }
 
-const mapStateToProps = ({user}) =>({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 })
 
 //cambiamos una variable global signIN signOUT
