@@ -7,7 +7,7 @@ import CartItem from './../cart-item/cart-item.component';
 
 import './cart-dropdown.styles.scss';
 
-import {selectCarItems} from './../../redux/cart/cart.selector' 
+import {selectCartItems} from './../../redux/cart/cart.selector' 
 import {createStructuredSelector} from 'reselect';
 import {toggleCartHidden} from './../../redux/cart/cart.action'
 
@@ -33,7 +33,7 @@ const CartDropdown = ({cartItems, history,dispatch}) =>(
 )
 
 const mapStateToProps=createStructuredSelector({
-    cartItems:selectCarItems
+    cartItems:selectCartItems
 })
 //si no ponemos segundo argumento nos pasa el dispatch 
 // const mapDispatchToProps = dispatch =>({
