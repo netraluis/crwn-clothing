@@ -8,13 +8,15 @@ import CheckoutPage from './pages/checkout/checkout.component'
 
 import Header from './components/header/header.component';
 import SignInsignUp from './pages/sign-in-sign-up/sign-in-sign-up.component';
-import {auth,createUserProfileDocument} from './firebase/firebase.utils';
+import {auth,createUserProfileDocument, addCollectionAndDocuments} from './firebase/firebase.utils';
 
 import {connect} from 'react-redux';
 import {setCurrentUser} from './redux/user/user.action';
 
 import {selectCurrentUser} from './redux/user/user.selector';
 import {createStructuredSelector} from 'reselect'
+
+// import {selectCollectionsForPreview} from './redux/shop/shop.selector';
 
 
 
@@ -26,7 +28,7 @@ componentDidMount(){
 
   const {setCurrentUser} = this.props;
   this.unsubsribeFromAuth = auth.onAuthStateChanged(async userAuth=>{
-    console.log(userAuth)
+    // console.log(userAuth)
     if(userAuth){
       const userRef = await createUserProfileDocument(userAuth);
 
@@ -38,6 +40,8 @@ componentDidMount(){
       })
     }else{
       setCurrentUser(userAuth)
+      // console.log('jugada', collectionArray.map(({title, items})=>({title,items})) )
+      // addCollectionAndDocuments('collections', collectionArray.map(({title, items})=>({title,items}))) subir los datos DB
     }
     // createUserProfileDocument(userAuth)
     // this.setState({
@@ -68,7 +72,8 @@ componentWillUnmount(){
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  // collectionArray: selectCollectionsForPreview
 })
 
 //cambiamos una variable global signIN signOUT
