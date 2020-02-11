@@ -2,10 +2,16 @@ import React from 'react';
 
 import './custom-button.styles.scss';
 
-const CustomButton  = ({children, isGoogleSignIn, inverted,...otherProps}) =>(
-    <button className = {`${isGoogleSignIn ? 'google-sign-in':''} ${inverted ? 'inverted':''} custom-button`} {...otherProps}>
+import CustomButtonContainer from './custom-button.styles';
+
+const CustomButton  = //se pueden quitar todas las props para user css component he borrado isGoogleSignIn para que vaya con component css
+({children, inverted,...otherProps}) =>(
+    // <button className = {`${isGoogleSignIn ? 'google-sign-in':''} ${inverted ? 'inverted':''} custom-button`} {...otherProps}>
+    //     {children}
+    // </button>
+    <CustomButtonContainer{...otherProps}>
         {children}
-    </button>
+    </CustomButtonContainer>
 )
 
 export default CustomButton;

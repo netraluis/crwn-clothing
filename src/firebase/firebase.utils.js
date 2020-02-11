@@ -20,6 +20,12 @@ const config = {
 
     const snapShot = await userRef.get();
 
+
+    // const collectionRef = firestore.collection('users')
+    // const collectionSnapshot = await collectionRef.get()
+    // console.log('lo1',{collectionSnapshot})
+    // console.log('lo2',collectionSnapshot)
+
     if (!snapShot.exists){
         const {displayName, email} = userAuth;
         const createdAt = new Date();
