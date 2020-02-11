@@ -1,6 +1,4 @@
 import React from "react";
-import SHOP_DATA from "./shop.data.js";
-import CollectionPreview from "../../components/collection-preview/collection-preview.component";
 
 import { selectShopCollections } from "./../../redux/shop/shop.selector";
 
@@ -15,7 +13,7 @@ import CollectionPage from '../collection/collection.component';
 
 const ShopPage = ({match, history,location}) => {
 
-  console.log('match',match,'history',history,'location', location)
+  // console.log('match',match,'history',history,'location', location)
   return (
     <div className="shop-page">
       <Route exact path = {`${match.path}`} component={CollectionsOverview}/>

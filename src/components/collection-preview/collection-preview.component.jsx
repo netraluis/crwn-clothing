@@ -10,7 +10,7 @@ const CollectionPreview = (prop) => {
     return (
         <div>
             <div className='collection-preview'>
-                <h1 className='title'>{}</h1>
+                <h1 className='title'>{title}</h1>
                 <div className='preview'>
                     {
                         items
