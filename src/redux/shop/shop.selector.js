@@ -20,12 +20,12 @@ export const selectShopCollections = createSelector(
 export const selectCollection = collectionUrlParam => 
 createSelector(
     [selectShopCollections],
-    collections => collections[collectionUrlParam]
+    collections => collections ? collections[collectionUrlParam] : null
     // collections.find(
         //     collection=>collection.id===COLLECTION_ID_MAP[collectionUrlParam]) ------- era cuando era array --------
 )
 
 export const selectCollectionsForPreview = createSelector(
     [selectShopCollections],
-    collections => Object.keys(collections).map(key => collections[key]) //-----pasar de objeto a array a el no le va si es objeto a mi si 
+    collections => collections ? Object.keys(collections).map(key => collections[key]):[] //-----pasar de objeto a array 
 )
