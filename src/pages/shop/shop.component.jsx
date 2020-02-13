@@ -57,11 +57,11 @@ class ShopPage extends React.Component {
   //   fetch(`https://firestore.googleapis.com/v1/projects/crwn-db-f05ce/databases/(default)/documents/collections`)
   //   .then(response=>response.json())
   //   .then(collections=>console.log(collections))
-  // }
   //fetch tipico
   // componentWillUnmount(){
   //   this.unsubscribeFromSnapshot();
   // } esto es si es observable
+  }
   render() {
     const { match } = this.props;
     const { loading } = this.state;
