@@ -11,11 +11,13 @@ import CollectionsOverview from './../../components/collections-overview/collect
 
 import CollectionPage from '../collection/collection.component';
 
-import { firestore, convertCollectionsSnapshotToMap } from './../../firebase/firebase.utils';
 
-import { updateCollections } from '../../redux/shop/shop.actions';
+
+import { fetchollectionsStartAsync } from '../../redux/shop/shop.actions';
 
 import WithSpinner from '../../components/withSpinner/with-spinner.component';
+
+import {selectIsCollectionFetching, selectIsCollectionsLoaded} from '../../redux/shop/shop.selector';
 
 const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
 const CollectionPageWithSpinner = WithSpinner(CollectionPage);
@@ -28,14 +30,16 @@ class ShopPage extends React.Component {
   //   }
   // }
 
-  state = {
-    loading: true
-  }
-  unsubscribeFromSnapshot = null;
+  // state = {
+  //   loading: true
+  // }
+  // unsubscribeFromSnapshot = null;
 
   componentDidMount() {
-    const { updateCollections } = this.props
-    const collectionRef = firestore.collection('collections');
+    const {fetchollectionsStartAsync} = this.props 
+    fetchollectionsStartAsync()
+    // const { updateCollections } = this.props
+    // const collectionRef = firestore.collection('collections');
 
     // this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
     //   const collectionMap = convertCollectionsSnapshotToMap(snapshot);
@@ -46,12 +50,12 @@ class ShopPage extends React.Component {
     // esto es con observables de firebase
 
 
-    collectionRef.get().then(snapshot => {
-      const collectionMap = convertCollectionsSnapshotToMap(snapshot);
+    // collectionRef.get().then(snapshot => {
+      // const collectionMap = convertCollectionsSnapshotToMap(snapshot);
       // console.log('mapeo',collectionMap)
-      updateCollections(collectionMap)
-      this.setState({ loading: false });
-    })
+      // updateCollections(collectionMap)
+      // this.setState({ loading: false });
+    // })
     // promise no se actualiza hasta que no cargas de nuevo el componente
 
   //   fetch(`https://firestore.googleapis.com/v1/projects/crwn-db-f05ce/databases/(default)/documents/collections`)
@@ -63,17 +67,16 @@ class ShopPage extends React.Component {
   // } esto es si es observable
   }
   render() {
-    const { match } = this.props;
-    const { loading } = this.state;
+    const { isCollectionFetching,match,isCollectionsLoaded } = this.props;
     return (
       <div className="shop-page">
         <Route exact path={`${match.path}`} render={props => (
-          <CollectionsOverviewWithSpinner isLoading={loading} {...props} />
+          <CollectionsOverviewWithSpinner isLoading={!isCollectionsLoaded} {...props} />
         )
         }
         />
         <Route path={`${match.path}/:collectionId`} render={props => (
-          <CollectionPageWithSpinner isLoading={loading} {...props} />
+          <CollectionPageWithSpinner isLoading={!isCollectionsLoaded} {...props} />
         )}
 
         />
@@ -99,12 +102,13 @@ class ShopPage extends React.Component {
 //   );
 // };
 
-// const mapStateToProps = createStructuredSelector({
-//   collections: selectShopCollections
-// });
+const mapStateToProps = createStructuredSelector({
+  isCollectionFetching: selectIsCollectionFetching,
+  isCollectionsLoaded: selectIsCollectionsLoaded
+});
 
 const mapDispatchToProps = dispatch => ({
-  updateCollections: collectionsMap => dispatch(updateCollections(collectionsMap))
+  fetchollectionsStartAsync: () => dispatch(fetchollectionsStartAsync())
 })
 
-export default connect(null, mapDispatchToProps)(ShopPage);
+export default connect(mapStateToProps,mapDispatchToProps)(ShopPage);
