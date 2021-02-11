@@ -34,7 +34,7 @@ class SignUp extends React.Component{
                 password
             );
 
-            createUserProfileDocument(user, {displayName})
+            await createUserProfileDocument(user, {displayName})
         }catch(error){
             console.error(error)
         }
@@ -59,7 +59,7 @@ class SignUp extends React.Component{
                         type='text'
                         name='displayName'
                         value={displayName}
-                        onChange = {this.handleChange}
+                        handleChange = {this.handleChange}
                         label = 'Display name'
                         required
                         />
@@ -67,7 +67,7 @@ class SignUp extends React.Component{
                         type='email'
                         name='email'
                         value={email}
-                        onChange = {this.handleChange}
+                        handleChange = {this.handleChange}
                         label = 'email'
                         required
                         />
@@ -75,7 +75,7 @@ class SignUp extends React.Component{
                         type='password'
                         name='password'
                         value={password}
-                        onChange = {this.handleChange}
+                        handleChange = {this.handleChange}
                         label = 'password'
                         required
                         />
@@ -83,7 +83,7 @@ class SignUp extends React.Component{
                         type='password'
                         name='confirmPassword'
                         value={confirmPassword}
-                        onChange = {this.handleChange}
+                        handleChange = {this.handleChange}
                         label = 'confirmPassword'
                         required
                         />

@@ -73,12 +73,8 @@ class ShopPage extends React.Component {
     const { isCollectionFetching,match,isCollectionsLoaded } = this.props;
     return (
       <div className="shop-page">
-        <Route exact path={`${match.path}`} component={CollectionsOverviewContainer
-        }
-        />
-        <Route path={`${match.path}/:collectionId`} component={CollectionPageContainer}
-
-        />
+        <Route exact path={`${match.path}`} component={CollectionsOverviewContainer}/>
+        <Route path={`${match.path}/:collectionId`} component={CollectionPageContainer}/>
 
       </div>
     );

@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+
+//TODO  routing
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import ShopPage from './pages/shop/shop.component';
@@ -52,6 +54,7 @@ componentDidMount(){
 }
 
 componentWillUnmount(){
+  // cierra subscripcion
   this.unsubsribeFromAuth();
 }
   render(){
@@ -64,7 +67,7 @@ componentWillUnmount(){
           <Route exact path='/checkout' component = {CheckoutPage}/>
           <Route exact path='/signin' render = {
             ()=>(this.props.currentUser ? (<Redirect to = '/'/>):(<SignInsignUp/>))
- }/>
+          }/>
         </Switch>
       </div>
     );

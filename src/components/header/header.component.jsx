@@ -12,6 +12,7 @@ import {createStructuredSelector} from 'reselect';
 import {selectCurrentUser} from './../../redux/user/user.selector';
 import {selectCarHidden} from './../../redux/cart/cart.selector';
 
+// antes era un div pero ha hecho el css con un jsx
 import  {HeaderContainer, LogoContainer, OptionsContainer, OptionDiv, OptionLink} from './header.styles'
 
 const Header =({currentUser,hidden})=>(

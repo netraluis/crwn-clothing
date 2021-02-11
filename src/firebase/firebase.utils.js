@@ -82,10 +82,28 @@ const config = {
 
   const provider = new firebase.auth.GoogleAuthProvider();
   provider.setCustomParameters({ prompt: 'select_account'});
-
+  
   export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
   export default firebase;
+
+
+
+  /* 
+
+  GET DATA
+  firestore.collection('users').doc('sdfsknmdlkfjvh').collection('item').doc('manaolo')
+  firestore.doc('users/sdfsknmdlkfjvh/item/manaolo')
+  
+  Query Reference QuerySnapshot
+  document reference CRUD METHOD documentRef.get() en el docSnapshot propieedad exis si existe 
+  lo que devuleve firestore.doc('path') lo usamos como document reference
+  Collection reference
+   
+
+  documentRef.onSnapshot(sna=>{sna})
+  Document snapshot .exist .data()
+  */
 
 
 

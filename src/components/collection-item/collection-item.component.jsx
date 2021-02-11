@@ -13,6 +13,7 @@ const CollectionItem = ({item,addItem}) =>{
         <div 
             className = 'image'
             style  = {{
+                // TODO imagen de fondo
                 backgroundImage : `url(${imageUrl})`
             }}
             />
