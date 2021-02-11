@@ -45,7 +45,11 @@ const Header =({currentUser,hidden})=>(
 );
 
 //Redux
-
+/*
+const mapStateToProps =  state =>({
+    currentUser: state.user.currentUser
+})
+*/
 const mapStateToProps = createStructuredSelector({
     //currentUserVariable que usamos en el componente el primero sería el caso de que cojamos una variable del state
     currentUser: selectCurrentUser,
