@@ -46,8 +46,8 @@ const Header =({currentUser,hidden})=>(
 
 //Redux
 /*
-const mapStateToProps =  state =>({
-    currentUser: state.user.currentUser
+const mapStateToProps =  {user:{currentUser}} =>({
+    currentUser: currentUser
 })
 */
 const mapStateToProps = createStructuredSelector({

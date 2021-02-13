@@ -18,7 +18,7 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
   const existingCartItem = cartItems.find(
     cartItem => cartItem.id === cartItemToRemove.id
   );
-  console.log(existingCartItem)
+
 
   if(existingCartItem.quantity===1){
       return cartItems.filter(cartItem=>cartItem.id!==cartItemToRemove.id)

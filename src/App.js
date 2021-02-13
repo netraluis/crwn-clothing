@@ -30,7 +30,6 @@ componentDidMount(){
 
   const {setCurrentUser} = this.props;
   this.unsubsribeFromAuth = auth.onAuthStateChanged(async userAuth=>{
-    // console.log('userAuth',userAuth)
     if(userAuth){
       const userRef = await createUserProfileDocument(userAuth);
 
@@ -42,14 +41,8 @@ componentDidMount(){
       })
     }else{
       setCurrentUser(userAuth)
-      // console.log('jugada', collectionArray.map(({title, items})=>({title,items})) )
-      // addCollectionAndDocuments('collections', collectionArray.map(({title, items})=>({title,items}))) subir los datos DB
     }
-    // createUserProfileDocument(userAuth)
-    // this.setState({
-    //   currentUser:userAuth
-    // });
-    // console.log(user);
+
   });
 }
 
@@ -57,6 +50,7 @@ componentWillUnmount(){
   // cierra subscripcion
   this.unsubsribeFromAuth();
 }
+
   render(){
     return (
       <div>
@@ -74,10 +68,16 @@ componentWillUnmount(){
   }
 }
 
+/*
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+})
+*/
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
   // collectionArray: selectCollectionsForPreview
 })
+
 
 //cambiamos una variable global signIN signOUT
 const mapDispatchToProps = dispatch =>({

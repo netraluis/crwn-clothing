@@ -6,7 +6,6 @@ import './collection-preview.styles.scss';
 
 const CollectionPreview = (prop) => {
     const { title, items } = prop
-    // console.log('---------------------------------------------------------------------',prop)
     return (
         <div>
             <div className='collection-preview'>

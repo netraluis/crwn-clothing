@@ -14,6 +14,7 @@ if(process.env.NODE_ENV==='development'){
 //creamos el store
 export const store = createStore(rootReducer, applyMiddleware(...middlewares))
 
+// un store persisitor
 export const persistor = persistStore(store)
 
 // export default {store, persistor}; 
