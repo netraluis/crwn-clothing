@@ -118,6 +118,11 @@ const config = {
 
   documentRef.onSnapshot(sna=>{sna})
   Document snapshot .exist .data()
+
+
+  ----------observables/promises----------
+  .onSnapshot ---> observable
+  .get        ---> promises
   */
 
 

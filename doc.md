@@ -105,7 +105,7 @@ Single Source of truth | state is read only: immutablility | changes using pure 
                 const selectCart = state => state.cart // selectores son objetos que son una parte del state
                 export const selectCartItems = createSelector(
                   [selectCart], //array of selectors los parametros de abajo entran por el orden que esten aqui colocados
-                  (cart) => cart.cartItems //function that return the value that we won out of this selector
+                  (cart) => cart.cartItems //function that return the value that we want out of this selector
                 )
             
           2.1 - const mapStateToProps =  state => ({
@@ -119,6 +119,10 @@ Single Source of truth | state is read only: immutablility | changes using pure 
                 
             })
             ```
+            const mapStateToProps = createStructuredSelector({
+                isLoading: state => !selectIsCollectionsLoaded(state) 
+            //solamente es la antigua manera de hacerlo y se hace para poder usar !
+            })
 
         - en el mapDispatchProps
           - ```
@@ -150,4 +154,9 @@ Single Source of truth | state is read only: immutablility | changes using pure 
           - import { PersistGate } from "redux-persist/integration/react";
           - <PersistGate persistor={persistor}>
 ### HOC 
-  -src/component/withSpinnner
+  - src/component/withSpinnner
+
+### Redux-Thunk 
+  - src/redux/store.js
+  - `import thunk from 'redux-thunk';`
+  - es un middleware no permite devolver funciones dentro del reducer que tenga dispatch como parametro igual que MapDispatchToProps con connect
