@@ -1,5 +1,6 @@
 ### Javasacript 
   -`map()` `filter()` return a new array
+  - `find()` nos devuelve el valor que cumple 
   -Memoization and caching
   - [simbolos rederio](https://www.w3schools.com/charsets/ref_utf_dingbats.asp)
 
@@ -38,6 +39,7 @@ import react-router-dom
           <Route exact path='/signin' render = {
             ()=>(this.props.currentUser ? (<Redirect to = '/'/>):(<SignInsignUp/>))
           }/>
+          <Route exact path='/checkout' render = {(props)=> <CollectionsOverviewWithSpinner isLoading= {loading} {...otherProps} />)}/>
           </Switch>
       - ```
 
@@ -85,9 +87,15 @@ Single Source of truth | state is read only: immutablility | changes using pure 
       - `import { connect } from 'react-redux';` es un HOC nos permite modificar el componente para tener acceso a redux
         - en el mapStateToProps: la primera opcion cada vez que se actualiza el store el reducer general vuelve a renderizar esta prop
           1 - ```
-            const mapStateToProps =  state => ({
+            const mapStateToProps =  (state) => ({
                 currentUser: state.user.currentUser
                 nombreProp: state.reducerConcrreto.item
+            })
+            ```
+          1.2  - ```
+            const mapStateToProps =  (state, propsDelComponenteWrappeado) => ({
+                collection: selectCollection(ownProps.match.params.collectionId)(state) // hay que wrappear selector
+                nombreProp: selector(propsDelComponenteWrappeado.path.path)(state)
             })
             ```
           2 - `import { createSelector } from 'reselect`:
@@ -141,3 +149,5 @@ Single Source of truth | state is read only: immutablility | changes using pure 
         - src/index.js.js //envolivendo App para dar contexto en toda la app 
           - import { PersistGate } from "redux-persist/integration/react";
           - <PersistGate persistor={persistor}>
+### HOC 
+  -src/component/withSpinnner

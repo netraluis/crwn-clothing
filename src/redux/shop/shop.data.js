@@ -1,3 +1,7 @@
+/**
+ * ya esta en firebase
+ */
+
 const SHOP_DATA = [
   {
     id: 1,

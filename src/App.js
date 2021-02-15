@@ -29,10 +29,11 @@ unsubsribeFromAuth = null
 componentDidMount(){
 
   const {setCurrentUser} = this.props;
+  // subscribe
   this.unsubsribeFromAuth = auth.onAuthStateChanged(async userAuth=>{
     if(userAuth){
       const userRef = await createUserProfileDocument(userAuth);
-
+      // subscribe
       userRef.onSnapshot(snapShot=>{
           setCurrentUser({
             id:snapShot.id,

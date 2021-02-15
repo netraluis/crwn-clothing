@@ -44,8 +44,16 @@ const config = {
 
     };
 
+
+    // esto solo lo hacemos para actualizar nuestra base de datos la primera vez
     export const addCollectionAndDocuments = async(collectionKey, objectsToAdd) =>{
         const collectionRef = firestore.collection(collectionKey);
+
+        /**
+         * hay que hacer la subida de cada objeto del array un 
+         * o por uno con esto si falla uno
+         * fallan todos
+         *  */  
 
         const batch = firestore.batch();
 
@@ -57,6 +65,10 @@ const config = {
         return await batch.commit()
     }
 
+    /**
+     * convierte array de collections a objeto lo seguimos usando en el 
+     * shop.actions.js
+     */
     export const convertCollectionsSnapshotToMap = (collections) => {
         const transformedCollection = collections.docs.map(doc=>{
             const {title, items} = doc.data();
@@ -95,7 +107,10 @@ const config = {
   firestore.collection('users').doc('sdfsknmdlkfjvh').collection('item').doc('manaolo')
   firestore.doc('users/sdfsknmdlkfjvh/item/manaolo')
   
-  Query Reference QuerySnapshot
+   1 - Query Reference=donde esta lo que buscamos | 
+   2 - QuerySnapshot= lo que hay es el get() del document reference
+     si es un collection reference .add() .docs .empty .size
+     si es un document reference .set() .get() .update() .delete()  .exist .data()
   document reference CRUD METHOD documentRef.get() en el docSnapshot propieedad exis si existe 
   lo que devuleve firestore.doc('path') lo usamos como document reference
   Collection reference
