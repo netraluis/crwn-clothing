@@ -28,6 +28,7 @@ const config = {
 
     if (!snapShot.exists){
         const {displayName, email} = userAuth;
+        console.log('userauth',displayName, email)
         const createdAt = new Date();
         try {
             await userRef.set({
@@ -87,15 +88,43 @@ const config = {
         }, {})
     }
 
+    export const getCurrentUser = () => {
+        //lo que teniamos antes en app.js
+  // const {setCurrentUser} = this.props;
+  // subscribe
+  // this.unsubsribeFromAuth = auth.onAuthStateChanged(async userAuth=>{
+  //   if(userAuth){
+  //     const userRef = await createUserProfileDocument(userAuth);
+  //     // subscribe
+  //     userRef.onSnapshot(snapShot=>{
+  //         setCurrentUser({
+  //           id:snapShot.id,
+  //           ...snapShot.data()
+  //         })
+  //     })
+  //   }else{
+  //     setCurrentUser(userAuth)
+  //   }
+
+  // });
+        return new Promise((resolve, reject)=>{
+            const unsubscribe = auth.onAuthStateChanged(userAuth => {
+                unsubscribe();
+                resolve(userAuth)
+            }, reject('error autentification'))
+        })
+    }
+
+
   firebase.initializeApp(config);
 
   export const auth = firebase.auth();
   export const firestore = firebase.firestore();
 
-  const provider = new firebase.auth.GoogleAuthProvider();
-  provider.setCustomParameters({ prompt: 'select_account'});
+  export const googleProvider = new firebase.auth.GoogleAuthProvider();
+  googleProvider.setCustomParameters({ prompt: 'select_account'});
   
-  export const signInWithGoogle = () => auth.signInWithPopup(provider);
+  export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
   export default firebase;
 

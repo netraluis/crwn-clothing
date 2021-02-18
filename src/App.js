@@ -18,6 +18,8 @@ import {setCurrentUser} from './redux/user/user.action';
 import {selectCurrentUser} from './redux/user/user.selector';
 import {createStructuredSelector} from 'reselect'
 
+import { checkUserSession } from './redux/user/user.action'
+
 // import {selectCollectionsForPreview} from './redux/shop/shop.selector';
 
 
@@ -28,28 +30,30 @@ unsubsribeFromAuth = null
 
 componentDidMount(){
 
-  const {setCurrentUser} = this.props;
+  const { checkUserSession } = this.props;
+  checkUserSession()
+  // const {setCurrentUser} = this.props;
   // subscribe
-  this.unsubsribeFromAuth = auth.onAuthStateChanged(async userAuth=>{
-    if(userAuth){
-      const userRef = await createUserProfileDocument(userAuth);
-      // subscribe
-      userRef.onSnapshot(snapShot=>{
-          setCurrentUser({
-            id:snapShot.id,
-            ...snapShot.data()
-          })
-      })
-    }else{
-      setCurrentUser(userAuth)
-    }
+  // this.unsubsribeFromAuth = auth.onAuthStateChanged(async userAuth=>{
+  //   if(userAuth){
+  //     const userRef = await createUserProfileDocument(userAuth);
+  //     // subscribe
+  //     userRef.onSnapshot(snapShot=>{
+  //         setCurrentUser({
+  //           id:snapShot.id,
+  //           ...snapShot.data()
+  //         })
+  //     })
+  //   }else{
+  //     setCurrentUser(userAuth)
+  //   }
 
-  });
+  // });
 }
 
 componentWillUnmount(){
   // cierra subscripcion
-  this.unsubsribeFromAuth();
+  // this.unsubsribeFromAuth();
 }
 
   render(){
@@ -79,12 +83,16 @@ const mapStateToProps = createStructuredSelector({
   // collectionArray: selectCollectionsForPreview
 })
 
+const mapDispatchToProps = dispatch =>({
+  checkUserSession: () => dispatch(checkUserSession())
+})
+
 
 //cambiamos una variable global signIN signOUT
-const mapDispatchToProps = dispatch =>({
-  // dentro de dispatch es lo que modifica el user con el objeto user que sera el payload
-  //setCurrentUser de la izquierda es el nombre para usar en el componente y le entras () un tipo user | this.props.setCurrentUser(user)
-  setCurrentUser: user => dispatch(setCurrentUser(user))
-})
+// const mapDispatchToProps = dispatch =>({
+//   // dentro de dispatch es lo que modifica el user con el objeto user que sera el payload
+//   //setCurrentUser de la izquierda es el nombre para usar en el componente y le entras () un tipo user | this.props.setCurrentUser(user)
+//   setCurrentUser: user => dispatch(setCurrentUser(user))
+// })
 //usamos segundo argumento el primero sirve para coger una variable este para cambiarla
 export default connect(mapStateToProps, mapDispatchToProps)(App);

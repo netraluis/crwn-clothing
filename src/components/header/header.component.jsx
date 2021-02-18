@@ -11,11 +11,12 @@ import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import {selectCurrentUser} from './../../redux/user/user.selector';
 import {selectCarHidden} from './../../redux/cart/cart.selector';
+import { signOutStart } from '../../redux/user/user.action'
 
 // antes era un div pero ha hecho el css con un jsx
 import  {HeaderContainer, LogoContainer, OptionsContainer, OptionDiv, OptionLink} from './header.styles'
 
-const Header =({currentUser,hidden})=>(
+const Header =({currentUser,hidden, signOutStart})=>(
     <HeaderContainer>
         <LogoContainer to='/'>
             <Logo className = 'logo'/>
@@ -29,7 +30,7 @@ const Header =({currentUser,hidden})=>(
             </OptionLink>
             {
                 currentUser ? 
-                <OptionDiv onClick = {()=>auth.signOut()}>SIGN OUT</OptionDiv>
+                <OptionDiv onClick = {signOutStart}>SIGN OUT</OptionDiv>
                 :
                 <OptionLink to ='/signin'>SIGN IN</OptionLink>
             }
@@ -44,6 +45,10 @@ const Header =({currentUser,hidden})=>(
 
 );
 
+const mapDispatchToProps = dispatch => ({
+    signOutStart: () => dispatch(signOutStart())
+})
+
 //Redux
 /*
 const mapStateToProps =  {user:{currentUser}} =>({
@@ -56,4 +61,4 @@ const mapStateToProps = createStructuredSelector({
     hidden: selectCarHidden
 })
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

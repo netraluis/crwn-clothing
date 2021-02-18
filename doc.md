@@ -130,8 +130,8 @@ Single Source of truth | state is read only: immutablility | changes using pure 
             // dentro del dispatch es lo que modifica el store y sera una action : {type: set_user, payload: manolo } estamos dispatcing
             //setCurrentUser de la izquierda es el nombre para usar en el componente y le entras () un tipo user | this.props.setCurrentUser(user)
             
-            setCurrentUser: user => dispatch(setCurrentUser(payload))
-            })
+            `setCurrentUser: user => dispatch(setCurrentUser(payload))
+            })`
         - tanto la funcion mapStateToProps como mapDispatchToProps accedemos como props
         - export default connect(mapStateToProps, mapDispatchToProps)(App);
     - ### persist
@@ -160,3 +160,23 @@ Single Source of truth | state is read only: immutablility | changes using pure 
   - src/redux/store.js
   - `import thunk from 'redux-thunk';`
   - es un middleware no permite devolver funciones dentro del reducer que tenga dispatch como parametro igual que MapDispatchToProps con connect
+
+### SAGA
+  - a function that runs  on a condition of a action. handle sideEffects (api call, inpure functions, async )
+    - Generator functions 
+      - function*
+      - function* gen(i){
+        - yield i; 
+        - yield i + 10 
+        - return 25
+      - }
+      - const g = gen(5)
+      - const gObj = g.next() // {value : 5, done: false}
+  - En materia 
+    - src/redux/store.js
+    - take take and action of regular redux flow
+      - `takeEvery` listen for every action of a specific type
+      - `takeLatest` cancells the other ones and take the last one
+    - Saga runea todos los Sagas sin bloquear uno a otro 
+    - `call` manera de llamar a las funciones dentro de Saga
+    - `put` el dispatch de saga mete things into regular redux flow
