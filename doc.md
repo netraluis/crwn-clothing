@@ -180,3 +180,16 @@ Single Source of truth | state is read only: immutablility | changes using pure 
     - Saga runea todos los Sagas sin bloquear uno a otro 
     - `call` manera de llamar a las funciones dentro de Saga
     - `put` el dispatch de saga mete things into regular redux flow
+### React Hook
+  -  const [stateValueName, SetStateFunction] = useState (initialValue)
+  -  useEffect (()=>{
+     -  //function is call whenever the component changes
+     -  // crear async function si quieres usar async y llamarla despues
+     -  //no cambiar cosas del componente para rerenderizar dejar array vacio 
+  -  },[variables que tienen que cambiar para que se ejecute si esta vacio solo se ejecutara al crear el componente])
+  -  useEffect(()=>{
+  -  
+     -  `return` es el cleanup la funcion que llama cuando unmount
+     -  return () =>{
+     -  }
+  -  })
