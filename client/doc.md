@@ -193,3 +193,7 @@ Single Source of truth | state is read only: immutablility | changes using pure 
      -  return () =>{
      -  }
   -  })
+  -  custom hooks reusar hooks
+  -  otro hook useReducer manera reactnative 
+     -  
+  -  
