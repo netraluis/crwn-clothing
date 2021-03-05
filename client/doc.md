@@ -99,7 +99,7 @@ Single Source of truth | state is read only: immutablility | changes using pure 
             })
             ```
           2 - `import { createSelector } from 'reselect`:
-
+              - Usa memoization
               -input selector
               src/redux/cart.selector.js
                 const selectCart = state => state.cart // selectores son objetos que son una parte del state
@@ -197,4 +197,35 @@ Single Source of truth | state is read only: immutablility | changes using pure 
   -  otro hook useReducer manera reactnative 
   -  
      -  
-  -  
+
+### Context API
+  - sustituye a redux
+  - context consumer ---> seria para coger datos o usar funciones definidas en el context
+    - existe el useContext es un hook 
+    - <CurrentUserContext.Consumer></CurrentUserContext.Consumer>
+  - context provider ---> cambiar datos del context 
+    - no tnemos hook :(
+    - <CurrentUserContext.Provider value = {}></CurrentUserContext.Provider>
+  - video 239 hace el simil con el Provider de redux
+
+### GRAPHQL
+  - prisma playground
+  - video 246 montar backend graphQL
+
+### Lazy
+
+- import lazy from 'react'
+- import React, { useEffect, lazy, Suspense } from "react";
+- const HomePage = lazy(() => import('./pages/homepages/homepage.component')); // lazy homepage
+
+
+### error boundries
+- <ErrorBoundary>
+
+### React.memo === react.pureComponent
+- export default React.memo(Person) --> video 269
+
+### useCallback 
+- memoize video 272
+### useMemo
+- useMemo video 273
